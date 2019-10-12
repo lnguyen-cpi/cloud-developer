@@ -8,8 +8,8 @@ const c = config.aws;
 // AWS.config.credentials = credentials;
 
 AWS.config = new AWS.Config({
-  accessKeyId: 'AKIAT3LT6DQVTKCI6SGA', 
-  secretAccessKey: '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', 
+  accessKeyId: '', 
+  secretAccessKey: '', 
   region: 'us-west-1'
 });
 
