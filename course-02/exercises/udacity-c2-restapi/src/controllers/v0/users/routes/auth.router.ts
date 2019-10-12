@@ -13,17 +13,20 @@ const router: Router = Router();
 
 async function generatePassword(plainTextPassword: string): Promise<string> {
     //@TODO Use Bcrypt to Generated Salted Hashed Passwords
-    return await bcrypt.genSaltSync(10, plainTextPassword);
+    let rounds = 10;
+    let salt = await bcrypt.genSalt(rounds);
+    let hash = await bcrypt.hash(plainTextPassword, salt);
+    return hash;
 }
 
 async function comparePasswords(plainTextPassword: string, hash: string): Promise<boolean> {
     //@TODO Use Bcrypt to Compare your password to your Salted Hashed Password
-    return await bcrypt.compareSync(plainTextPassword, hash);
+    return await bcrypt.compare(plainTextPassword, hash);
 }
 
 function generateJWT(user: User): string {
     //@TODO Use jwt to create a new JWT Payload containing
-    return jwt.sign(user, config.jwt.secret);
+    return jwt.sign(user.toJSON(), config.jwt.secret);
 }
 
 
