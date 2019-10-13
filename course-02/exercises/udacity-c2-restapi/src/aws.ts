@@ -8,20 +8,6 @@ const c = config.aws;
 var credentials = new AWS.SharedIniFileCredentials({profile: c.aws_profile});
 AWS.config.credentials = credentials;
 
-AWS.config = new AWS.Config({
-  accessKeyId: '', 
-  secretAccessKey: '', 
-  region: 'us-west-1'
-});
-
-
-
-// AWS.config = new AWS.Config({
-//   accessKeyId: '', 
-//   secretAccessKey: '', 
-//   region: 'us-west-1'
-// });
-
 
 export const s3 = new AWS.S3({
   signatureVersion: 'v4',
