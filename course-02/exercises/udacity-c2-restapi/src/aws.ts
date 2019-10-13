@@ -4,8 +4,17 @@ import { config } from './config/config';
 const c = config.aws;
 
 //Configure AWS
+
 var credentials = new AWS.SharedIniFileCredentials({profile: c.aws_profile});
 AWS.config.credentials = credentials;
+
+AWS.config = new AWS.Config({
+  accessKeyId: '', 
+  secretAccessKey: '', 
+  region: 'us-west-1'
+});
+
+
 
 // AWS.config = new AWS.Config({
 //   accessKeyId: '', 
