@@ -4,9 +4,24 @@ import { APIGatewayProxyEvent, APIGatewayProxyHandler, APIGatewayProxyResult } f
 
 import { CreateTodoRequest } from '../../requests/CreateTodoRequest'
 
-export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  const newTodo: CreateTodoRequest = JSON.parse(event.body)
+import { getUserId } from '../utils'
 
-  // TODO: Implement creating a new TODO item
-  return undefined
+
+import {createTodo}  from '../../BusinessLogic/todo'
+
+export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+
+  
+  const newTodo: CreateTodoRequest = JSON.parse(event.body);
+  const userId = getUserId(event);
+  const todoItem = await createTodo(newTodo, userId);
+
+  return {
+    statusCode: 201,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true
+    },
+    body: JSON.stringify(todoItem)
+  }
 }
